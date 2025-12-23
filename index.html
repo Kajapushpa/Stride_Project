@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>RCE's Digital Menu</h1>
+    <input type="text" id="searchInput" placeholder="Search for food...">
+    <button id="feedbackBtn" onclick="openFeedback()">Feedback</button>
+
+    <div class="tabs" id="categoryTabs">
+    </div>
+  </header>
+  <main id="menuContainer"></main>
+  <div id="itemModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">×</span>
+
+    <img id="modalImage">
+    <h2 id="modalName"></h2>
+    <p id="modalDesc"></p>
+    <p id="modalPrice"></p>
+    
+
+    <div id="ingredientsBox">
+      <h3>Ingredients</h3>
+      <ul id="modalIngredients"></ul>
+    </div>
+
+    <div id="nutritionBox">
+      <h3>Nutrition</h3>
+      <ul id="modalNutrition"></ul>
+    </div>
+    <button id="addToCartBtn">Add to Cart</button>
+
+  </div>
+</div>
+<div id="feedbackModal" class="feedback-modal">
+  <div class="feedback-content">
+    <span class="close-btn" onclick="closeFeedback()">×</span>
+
+    <h2>Feedback</h2>
+
+    <input type="text" id="fbName" placeholder="Your Name" required>
+    
+
+    <select id="fbRating" required>
+      <option value="">Rate us</option>
+      <option>⭐ Excellent</option>
+      <option>😊 Good</option>
+      <option>😐 Average</option>
+      <option>😞 Poor</option>
+    </select>
+
+    <textarea id="fbMessage" rows="4" placeholder="Your feedback..." required></textarea>
+
+    <button id="submitFeedback">Submit</button>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

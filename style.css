@@ -1,0 +1,294 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #b7e9e0;
+}
+
+header {
+  background: #10f07c;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+.modal-content h4 {
+  margin-top: 15px;
+  color: #00796b;
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.close-btn {
+  float: right;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#modalIngredients {
+  text-align: left;
+  padding-left: 20px;
+}
+
+#modalIngredients li {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+#modalNutrition {
+  text-align: left;
+  padding-left: 20px;
+}
+
+#modalNutrition li {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.view-btn {
+  margin-top: 8px;
+  padding: 8px 15px;
+  background: #0077aa;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-btn:hover {
+  background: #005f88;
+}
+
+
+header h1 {
+  margin: 0 0 10px;
+}
+
+header input {
+  padding: 10px;
+  width: 60%;
+  max-width: 400px;
+  border: none;
+  border-radius: 8px;
+}
+
+section {
+  padding: 20px;
+}
+
+.category-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #00796b;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 200px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;      /* 🔥 center vertically */
+  justify-content: center;  /* 🔥 center horizontally */
+  z-index: 999;
+}
+
+/* Modal box */
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;     /* content limit */
+  overflow-y: auto;    /* internal scroll */
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #00b894;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.tabs {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: white;
+  border: 2px solid #80d4ff;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #0077aa;
+  transition: 0.3s;
+}
+
+.tabs button.active {
+  background: #80d4ff;
+  color: white;
+}
+/* Make the menu grid cards zoom slightly on hover */
+.menu-grid .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.menu-grid .card:hover {
+  transform: scale(1.05); /* Zoom in slightly */
+  box-shadow: 0 8px 20px rgba(233, 21, 14, 0.91); /* Optional: subtle shadow */
+}
+
+
+#addToCartBtn:hover {
+  background: #e84300;
+}
+#addToCartBtn {
+  padding: 6px 12px;
+  background: #279ef3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto 0;
+}
+
+#addToCartBtn:hover {
+  background: #e84300;
+}
+/* Feedback button corner */
+#feedbackBtn {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  padding: 6px 14px;
+  font-size: 15px;
+  background: #ff4d00;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Feedback modal */
+.feedback-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.feedback-content {
+  background: white;
+  width: 90%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Inputs */
+.feedback-content input,
+.feedback-content select,
+.feedback-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Submit button */
+#submitFeedback {
+  width: 100%;
+  padding: 10px;
+  background: #ff4d00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
