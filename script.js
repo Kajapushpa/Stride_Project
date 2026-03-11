@@ -1069,13 +1069,13 @@ const menuData = {
 },
 {
   name: "Sprite",
-  price: 20-40,
+  price: "20 - ₹40",
   desc: "Lemon flavored soft drink",
   img: "https://th.bing.com/th/id/OIP.iPriIA_NtXGAzHSDCli5UwHaEo?w=247&h=180&c=7&r=0&o=5&cb=ucfimg2&dpr=1.1&pid=1.7&ucfimg=1"
 },
 {
   name: "Maaza",
-  price: 10-50,
+  price: "10 - ₹40",
   desc: "Mango drink",
   img: "https://th.bing.com/th/id/OIP.OWcgQxJWDJCnAW_SIDGizgHaHa?w=199&h=199&c=7&r=0&o=5&cb=ucfimg2&dpr=1.1&pid=1.7&ucfimg=1"
 },
@@ -1132,12 +1132,7 @@ const menuData = {
 };
 let cart = [];
 let selectedItem = null;
-
-
-
 menuData.All = Object.values(menuData).flat();
-
-
 menuData.All = Object.values(menuData).flat();
 
 const tabsContainer = document.getElementById("categoryTabs");
@@ -1293,7 +1288,7 @@ document.getElementById("submitFeedback").addEventListener("click", function() {
   const message = document.getElementById("fbMessage").value;
   
   if (name && rating && message) {
-    // You can add your logic here to handle the feedback data
+    
     console.log("Feedback submitted:", { name, rating, message });
     alert("Thank you for your feedback!");
     closeFeedback();
