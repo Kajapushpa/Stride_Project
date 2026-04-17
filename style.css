@@ -495,34 +495,38 @@ img {
   background: #ccc;
   border-radius: 10px;
 }
-@media (max-width: 600px) {
+/* MOBILE FIX FOR YOUR ACTUAL CLASSES */
+@media (max-width: 768px) {
 
-  /* Recommendation container */
-  .rec-container {
-    gap: 8px;
-    padding-bottom: 8px;
+  #recommendationsList {
+    display: flex !important;
+    flex-direction: column !important; /* one below one */
+    gap: 12px;
   }
 
-  /* Smaller cards */
-  .rec-card {
-    min-width: 85px;
-    padding: 6px;
+  .rec-container > div {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
     border-radius: 10px;
+    background: #fff;
   }
 
-  /* Smaller image */
-  .rec-card img {
-    height: 65px;
+  .rec-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
     border-radius: 8px;
   }
 
-  /* Text adjustment */
-  .rec-card p {
-    font-size: 11px;
+  .rec-container h4 {
+    font-size: 14px;
+    margin: 0;
   }
 
-  /* Heading spacing */
-  #recommendationsBox h3 {
-    font-size: 15px;
+  .rec-container p {
+    font-size: 12px;
+    margin: 0;
   }
 }
