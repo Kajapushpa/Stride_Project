@@ -1130,10 +1130,14 @@ const menuData = {
 
   ]
 };
+
 let cart = [];
 let selectedItem = null;
-menuData.All = Object.values(menuData).flat();
-menuData.All = Object.values(menuData).flat();
+menuData.All = [].concat(
+  ...Object.keys(menuData)
+    .filter(key => key !== "All") // prevent recursion
+    .map(key => menuData[key])
+);
 
 const tabsContainer = document.getElementById("categoryTabs");
 const menuContainer = document.getElementById("menuContainer");
@@ -1249,15 +1253,45 @@ function showModal(item) {
   }
   selectedItem = item;
 
-const addBtn = document.getElementById("addToCartBtn");
+ const addBtn = document.getElementById("addToCartBtn");
+
+addBtn.onclick = null; // clear old events
 addBtn.onclick = () => {
-  cart.push(item);
-  alert(item.name + " added to cart");
+  console.log("Adding:", item); // debug
+  addToCart(item);
 };
 
 
   modal.style.display = "flex";
   document.body.classList.add("modal-open");
+  // 👉 RECOMMENDATION DISPLAY
+const recBox = document.getElementById("recommendationsBox");
+const recList = document.getElementById("recommendationsList");
+
+recList.innerHTML = "";
+
+const recommendations = getRecommendations(item);
+
+if (recommendations.length > 0) {
+  recBox.style.display = "block";
+
+  recommendations.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "rec-card";
+
+    div.innerHTML = `
+      <img src="${r.img}" width="60">
+      <p>${r.name}</p>
+    `;
+
+    div.onclick = () => showModal(r);
+
+    recList.appendChild(div);
+  });
+
+} else {
+  recBox.style.display = "none";
+}
 }
 
 
@@ -1296,3 +1330,114 @@ document.getElementById("submitFeedback").addEventListener("click", function() {
     alert("Please fill in all fields.");
   }
 });
+function openCart() {
+  document.getElementById("cartModal").style.display = "flex";
+}
+
+function closeCart() {
+  document.getElementById("cartModal").style.display = "none";
+}
+function addToCart(item) {
+  const existing = cart.find(i => i.name === item.name);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ ...item, qty: 1 });
+  }
+
+  console.log(cart); // debug
+  updateCartUI();
+}
+function updateCartUI() {
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+
+    const div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <div class="cart-item-info">
+        <h4>${item.name}</h4>
+        <p>₹${item.price} x ${item.qty}</p>
+      </div>
+
+      <div class="cart-actions">
+        <button onclick="changeQty(${index}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
+        <button class="remove-btn" onclick="removeFromCart(${index})">✖</button>
+      </div>
+    `;
+
+    cartItems.appendChild(div);
+  });
+
+  cartCount.textContent = cart.length;
+  cartTotal.textContent = "Total: ₹" + total;
+}
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+}
+function changeQty(index, change) {
+  cart[index].qty += change;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  updateCartUI();
+}
+function getRecommendations(selectedItem) {
+  if (!selectedItem || !selectedItem.nutrition) return [];
+
+  // Convert string → number ( "400 kcal" → 400 )
+  const parseValue = (val) => parseFloat(val);
+
+  const target = {
+    calories: parseValue(selectedItem.nutrition.Calories),
+    protein: parseValue(selectedItem.nutrition.Protein),
+    carbs: parseValue(selectedItem.nutrition.Carbohydrates),
+    fat: parseValue(selectedItem.nutrition.Fat),
+    price: selectedItem.price
+  };
+
+  let allItems = menuData.All.filter(item => item.nutrition);
+
+  let scoredItems = allItems.map(item => {
+    const data = {
+      calories: parseValue(item.nutrition.Calories),
+      protein: parseValue(item.nutrition.Protein),
+      carbs: parseValue(item.nutrition.Carbohydrates),
+      fat: parseValue(item.nutrition.Fat),
+      price: item.price
+    };
+
+    // 🔥 CONTENT-BASED SIMILARITY (distance)
+    let diff =
+      Math.abs(target.calories - data.calories) * 0.2 +
+      Math.abs(target.protein - data.protein) * 0.3 +
+      Math.abs(target.carbs - data.carbs) * 0.2 +
+      Math.abs(target.fat - data.fat) * 0.2 +
+      Math.abs(target.price - data.price) * 0.1;
+
+    return { item, score: diff };
+  });
+
+  // sort (LOW score = more similar)
+  scoredItems.sort((a, b) => a.score - b.score);
+
+  // remove same item & return top 4
+  return scoredItems
+    .filter(x => x.item.name !== selectedItem.name)
+    .slice(0, 4)
+    .map(x => x.item);
+}
