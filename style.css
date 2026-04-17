@@ -495,3 +495,34 @@ img {
   background: #ccc;
   border-radius: 10px;
 }
+@media (max-width: 600px) {
+
+  /* Recommendation container */
+  .rec-container {
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+
+  /* Smaller cards */
+  .rec-card {
+    min-width: 85px;
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  /* Smaller image */
+  .rec-card img {
+    height: 65px;
+    border-radius: 8px;
+  }
+
+  /* Text adjustment */
+  .rec-card p {
+    font-size: 11px;
+  }
+
+  /* Heading spacing */
+  #recommendationsBox h3 {
+    font-size: 15px;
+  }
+}
